@@ -1,5 +1,7 @@
 #include "../inc/coin.hpp"
 
+#include <iostream>
+
 game::Coin::Coin(sf::Color main_color):
     CircleShape(COIN_RADIUS)
 {
@@ -13,7 +15,7 @@ game::Coin::Coin(sf::Color main_color):
     constexpr float border_thickness = m_border_perc * COIN_RADIUS/100.f;
     constexpr float shape_radius = COIN_RADIUS - border_thickness;
 
-    this->setOutlineThickness(border_thickness);
+    this->setOutlineThickness(-border_thickness);
     this->setOutlineColor(border_color);
 }
 
