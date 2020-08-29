@@ -23,6 +23,12 @@ void game::Game::draw_components()
             this->draw(*board.holes[j][i]);
         }
     }
+
+    for (std::vector<game::Coin*> cols: moves)
+    {
+        for (game::Coin* col: cols)
+            this->draw(*col);
+    }
 }
 
 void game::Game::process_move(int new_x)
@@ -31,24 +37,26 @@ void game::Game::process_move(int new_x)
 
     //TODO: replace 115 with const
     int column = new_x/115;
-    // std::cout << column << std::endl;
+
+    game::Coin * new_coin = nullptr;
 
     if (p1_move)
-    {
-        // std::cout << "p1_add" << std::endl;
-        moves[column].push_back(new game::P1_Coin());
-    }
+    // {
+        new_coin = new game::P1_Coin();
+        // moves[column].push_back(new game::P1_Coin());
+    // }
 
     else
-    {
-        // std::cout << "p2_add" << std::endl;
-        moves[column].push_back(new game::P2_Coin());
-    }
+    // {
+        new_coin = new game::P2_Coin();
+        // moves[column].push_back(new game::P2_Coin());
+    // }
+
+    new_coin->setPosition(new_x + 5, 100);
+    moves[column].push_back(new_coin);
 
     if (p1_move) p1_move = false;
     else p1_move = true;
-
-    // p1_move = ~p1_move;
 }
 
 void game::Game::print_moves()
