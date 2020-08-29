@@ -22,18 +22,14 @@ void game::Board::construct_holes()
 
     const size_t rows = dim.first, cols = dim.second;
 
-    for (size_t i = 0; i < cols; ++i) {
+    for (size_t col = 0; col < cols; ++col) {
 
         start_y = GAP;
 
-        for (size_t j = 0; j < rows; ++j) {
+        for (size_t row = 0; row < rows; ++row) {
 
-            holes[i][j] = new sf::CircleShape(hole);
-            // holes[i][j] = new sf::CircleShape(10.f);
-
-            holes[i][j]->setPosition(start_x, start_y);
-            // holes[i][j]->setFillColor(sf::Color::Blue);
-            
+            holes[col][row] = new sf::CircleShape(hole);
+            holes[col][row]->setPosition(start_x, start_y);
             start_y += (game::Coin::COIN_RADIUS * 2 + GAP);
         }
 
