@@ -8,17 +8,16 @@ namespace game {
 // Adjust the coin radius here
 const float COIN_RADIUS = 50.f;
 const sf::Color GREEN_COLOR = sf::Color(50, 200, 50);
-
-
+const sf::Color RED_COLOR = sf::Color(250, 26, 26);
 
 class Coin : public sf::CircleShape
 {
 private:
-    const int m_border_shade = 2;
-    const float m_border;
+    static const int m_border_shade  =  2;
+    static constexpr float m_border_perc = 10;
 public:
     // TODO: make use of point count?
-    Coin(sf::Color main_color = sf::Color(100,100,100), float radius = COIN_RADIUS, float border_perc = 10);
+    Coin(sf::Color main_color = sf::Color(100,100,100), float radius = COIN_RADIUS);
 };
 
 
@@ -28,8 +27,19 @@ class P1_Coin : public Coin
 private:
     static std::string m_player_name;
 public:
-    P1_Coin(sf::Color color = GREEN_COLOR);
+    P1_Coin(sf::Color color = RED_COLOR);
     P1_Coin(std::string p_name);
+};
+
+
+
+class P2_Coin : public Coin
+{
+private:
+    static std::string m_player_name;
+public:
+    P2_Coin(sf::Color color = GREEN_COLOR);
+    P2_Coin(std::string p_name);
 };
 
 }
