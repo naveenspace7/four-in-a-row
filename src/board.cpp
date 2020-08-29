@@ -7,6 +7,7 @@ game::Board::Board(const sf::Vector2u win_size): sf::RectangleShape(sf::Vector2f
     construct_holes();
 }
 
+// Create and return a single hole instance
 sf::CircleShape get_hole()
 {
     sf::CircleShape hole(game::Coin::COIN_RADIUS);
@@ -14,6 +15,7 @@ sf::CircleShape get_hole()
     return hole;
 }
 
+// Construct holes container for drawing empty spaces
 void game::Board::construct_holes()
 {
     sf::CircleShape hole = get_hole();
