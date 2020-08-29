@@ -5,19 +5,18 @@
 
 namespace game {
 
-// Adjust the coin radius here
-const float COIN_RADIUS = 50.f;
 const sf::Color GREEN_COLOR = sf::Color(50, 200, 50);
 const sf::Color RED_COLOR = sf::Color(250, 26, 26);
 
 class Coin : public sf::CircleShape
 {
 private:
+    static constexpr float COIN_RADIUS = 50.f;
     static const int m_border_shade  =  2;
     static constexpr float m_border_perc = 10;
+
 public:
-    // TODO: make use of point count?
-    Coin(sf::Color main_color = sf::Color(100,100,100), float radius = COIN_RADIUS);
+    Coin(sf::Color main_color = sf::Color(100,100,100));
 };
 
 
