@@ -13,7 +13,6 @@ game::Coin::Coin(sf::Color main_color):
     main_color.b /= m_border_shade;
 
     constexpr float border_thickness = m_border_perc * COIN_RADIUS/100.f;
-    constexpr float shape_radius = COIN_RADIUS - border_thickness;
 
     this->setOutlineThickness(-border_thickness);
     this->setOutlineColor(border_color);
