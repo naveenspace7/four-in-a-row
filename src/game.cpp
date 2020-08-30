@@ -1,6 +1,26 @@
 #include "../inc/game.hpp"
 #include <iostream>
 
+void game::Game::set_valid_keys()
+{
+    m_valid_keys.insert(sf::Keyboard::Key::Num1);
+    m_valid_keys.insert(sf::Keyboard::Key::Num2);
+    m_valid_keys.insert(sf::Keyboard::Key::Num3);
+    m_valid_keys.insert(sf::Keyboard::Key::Num4);
+    m_valid_keys.insert(sf::Keyboard::Key::Num5);
+    m_valid_keys.insert(sf::Keyboard::Key::Num6);
+    m_valid_keys.insert(sf::Keyboard::Key::Num7);
+
+    m_valid_keys.insert(sf::Keyboard::Key::Escape);
+}
+
+bool game::Game::is_valid_key(sf::Keyboard::Key key_pressed)
+{
+    if (m_valid_keys.find(key_pressed) != m_valid_keys.end())
+        return true;
+    return false;
+}
+
 void game::Game::single_drop_sound()
 {
     if (sound_buff.loadFromFile("drop.wav")) {
@@ -20,6 +40,8 @@ game::Game::Game(const std::string& game):
 
     for (size_t i = 0; i < game::Board::dim.second; ++i)
         moves[i].reserve(game::Board::dim.first);
+
+    set_valid_keys();
 }
 
 void game::Game::draw_components()
@@ -47,8 +69,6 @@ void game::Game::draw_components()
 // Handle player's move
 bool game::Game::process_move(int new_x)
 {
-    single_drop_sound();
-
     static bool p1_move = false;
     const int COLUMN_WID = 115;
     int column = new_x;
@@ -57,6 +77,10 @@ bool game::Game::process_move(int new_x)
     int Point = TOTAL - 110*(moves[column].size() + 1);
 
     game::Coin * new_coin = nullptr;
+
+    if (moves[column].size() == board.dim.first) return false;
+    
+    single_drop_sound();
 
     if (p1_move) new_coin = new game::P1_Coin();
 

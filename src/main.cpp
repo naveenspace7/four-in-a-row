@@ -24,9 +24,15 @@ int main()
 
             if(event.type == sf::Event::KeyPressed)
             {
-              if(window.process_move(event.key.code - sf::Keyboard::Num1))
+              if (window.is_valid_key(event.key.code))
               {
-                std::cout << "game ends here, do whatever" << std::endl;
+                if (event.key.code == sf::Keyboard::Escape)
+                  window.close();
+                
+                else if(window.process_move(event.key.code - sf::Keyboard::Num1))
+                {
+                  std::cout << "game ends here, do whatever" << std::endl;
+                }
               }
             }
         }
