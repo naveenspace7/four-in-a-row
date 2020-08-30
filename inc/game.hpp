@@ -26,9 +26,11 @@ public:
 
     void draw_components();
 
-    void process_move(int new_x);
+    bool process_move(int new_x);
 
     void print_moves();
+
+    void print_winner(Coin* last_coin);
 
     void single_drop_sound();
 };
