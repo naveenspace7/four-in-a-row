@@ -22,10 +22,12 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            if(event.type == sf::Event::KeyPressed)
             {
-                // sf::Vector2i click_pos = sf::Mouse::getPosition(window);
-                window.process_move( sf::Mouse::getPosition(window).x);
+              if(window.process_move(event.key.code - sf::Keyboard::Num1))
+              {
+                std::cout << "game ends here, do whatever" << std::endl;
+              }
             }
         }
 
