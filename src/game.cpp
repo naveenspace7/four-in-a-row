@@ -69,8 +69,6 @@ void game::Game::draw_components()
 // Handle player's move
 bool game::Game::process_move(int new_x)
 {
-    single_drop_sound();
-
     static bool p1_move = false;
     const int COLUMN_WID = 115;
     int column = new_x;
@@ -79,6 +77,10 @@ bool game::Game::process_move(int new_x)
     int Point = TOTAL - 110*(moves[column].size() + 1);
 
     game::Coin * new_coin = nullptr;
+
+    if (moves[column].size() == board.dim.first) return false;
+    
+    single_drop_sound();
 
     if (p1_move) new_coin = new game::P1_Coin();
 
