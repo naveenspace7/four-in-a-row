@@ -12,6 +12,8 @@ void game::Game::single_drop_sound()
 game::Game::Game(const std::string& game): 
                 sf::RenderWindow(sf::VideoMode(GAME_FRAME_WIDTH, GAME_FRAME_HEIGHT), game), board(this->getSize())
 {
+    this->setFramerateLimit(GAME_FRAME_RATE);
+
     // create place holder for the moves
 
     moves.resize(game::Board::dim.second);
@@ -25,6 +27,8 @@ void game::Game::draw_components()
     // draw board
     this->draw(board);
 
+    // TODO: if hole or coin needs to be drawn
+
     // draw holes
     for(int i = 0; i < game::Board::dim.first; ++i) {
         for(int j = 0; j < game::Board::dim.second; ++j) {
@@ -32,6 +36,7 @@ void game::Game::draw_components()
         }
     }
 
+    // draw player coins
     for (std::vector<game::Coin*> cols: moves)
     {
         for (game::Coin* col: cols)
@@ -39,18 +44,15 @@ void game::Game::draw_components()
     }
 }
 
+// Handle player's move
 void game::Game::process_move(int new_x)
 {
     single_drop_sound();
 
     static bool p1_move = false;
-
     const int COLUMN_WID = 115;
-
     int column = new_x/COLUMN_WID;
-
     int TOTAL = 110 * 6;
-
     int Point = TOTAL - 110*(moves[column].size() + 1);
 
     game::Coin * new_coin = nullptr;
@@ -74,6 +76,8 @@ void game::Game::print_moves()
     {
         for (game::Coin* c: v)
         {
+            // Use the below method to decide to 
+            // which player a coins belongs to
             if (typeid(*c) == typeid(game::P1_Coin))
                 std::cout << "p1" << std::endl;
             else

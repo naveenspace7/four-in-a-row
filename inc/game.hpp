@@ -19,6 +19,8 @@ private:
     sf::Sound sound_handle;
     sf::SoundBuffer sound_buff;
 
+    const int GAME_FRAME_RATE = 10; // FPS
+
 public:
     Game(const std::string& game = "Game");
 
