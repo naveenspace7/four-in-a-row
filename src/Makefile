@@ -1,14 +1,17 @@
 game: main.o board.o coin.o game.o
-	g++ -o game game.o board.o coin.o main.o -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+	g++ -o $@ $^ -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 main.o: main.cpp
-	g++ -c main.cpp
+	g++ -c $<
 
 board.o: board.cpp
-	g++ -c board.cpp
+	g++ -c $< -I../inc
 
 game.o: game.cpp
-	g++ -c game.cpp
+	g++ -c $<
 
 coin.o: coin.cpp
-	g++ -c coin.cpp
+	g++ -c $<
+
+clean:
+	rm *.o game
