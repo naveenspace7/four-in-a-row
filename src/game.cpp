@@ -1,28 +1,27 @@
 #include "../inc/game.hpp"
 #include <iostream>
 
-// game::Game::single_drop_sound()
-// {
-    
-
-// }
+void game::Game::single_drop_sound()
+{
+    if (sound_buff.loadFromFile("drop.wav")) {
+        sound_handle.setBuffer(sound_buff);
+        sound_handle.play();
+    }
+}
 
 game::Game::Game(const std::string& game): 
                 sf::RenderWindow(sf::VideoMode(GAME_FRAME_WIDTH, GAME_FRAME_HEIGHT), game), board(this->getSize())
 {
+    // create place holder for the moves
+
     moves.resize(game::Board::dim.second);
 
     for (size_t i = 0; i < game::Board::dim.second; ++i)
-    {
         moves[i].reserve(game::Board::dim.first);
-    }
 }
 
 void game::Game::draw_components()
 {
-    // make sound
-
-
     // draw board
     this->draw(board);
 
@@ -42,6 +41,8 @@ void game::Game::draw_components()
 
 void game::Game::process_move(int new_x)
 {
+    single_drop_sound();
+
     static bool p1_move = false;
 
     const int COLUMN_WID = 115;
@@ -60,6 +61,8 @@ void game::Game::process_move(int new_x)
 
     new_coin->setPosition(column*110 + 10, Point + 10);
     moves[column].push_back(new_coin);
+
+    // TODO: set game logic here
 
     if (p1_move) p1_move = false;
     else p1_move = true;

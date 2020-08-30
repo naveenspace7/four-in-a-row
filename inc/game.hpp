@@ -16,6 +16,9 @@ private:
 
     std::vector<std::vector<Coin*>> moves;
 
+    sf::Sound sound_handle;
+    sf::SoundBuffer sound_buff;
+
 public:
     Game(const std::string& game = "Game");
 
@@ -24,6 +27,8 @@ public:
     void process_move(int new_x);
 
     void print_moves();
+
+    void single_drop_sound();
 };
 
 }
