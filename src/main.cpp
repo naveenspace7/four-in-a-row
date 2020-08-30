@@ -24,17 +24,8 @@ int main()
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
-                sf::Vector2i click_pos = sf::Mouse::getPosition(window);
-                
-                // if (!buffer.loadFromFile("drops.wav")) {
-                //     std::cout << "failed to play music" << std::endl;
-                //     return -1;
-                // }
-
-                // sound.setBuffer(buffer);
-                // sound.play();
-
-                window.process_move(click_pos.x);
+                // sf::Vector2i click_pos = sf::Mouse::getPosition(window);
+                window.process_move( sf::Mouse::getPosition(window).x);
             }
         }
 
