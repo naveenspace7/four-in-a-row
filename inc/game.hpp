@@ -2,8 +2,10 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include "board.hpp"
 #include "coin.hpp"
+#include <unordered_set>
 
 namespace game
 {
@@ -19,6 +21,8 @@ private:
     sf::Sound sound_handle;
     sf::SoundBuffer sound_buff;
 
+    std::unordered_set<sf::Keyboard::Key> m_valid_keys;
+
     const int GAME_FRAME_RATE = 10; // FPS
 
 public:
@@ -33,6 +37,10 @@ public:
     void print_winner(Coin* last_coin);
 
     void single_drop_sound();
+
+    bool is_valid_key(sf::Keyboard::Key);
+
+    void set_valid_keys();
 };
 
 }
